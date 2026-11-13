@@ -1,0 +1,98 @@
+body {
+  font-family: system-ui, sans-serif;
+  color: #1e293b;
+  line-height: 1.5;
+  margin: 0;
+  padding: 16px;
+}
+
+header {
+  background-color: #f1f5f9;
+  padding: 12px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+h1, h2, h3 {
+  line-height: 1.2;
+}
+
+:where(h1, h2, h3) {
+  margin-block: 0.5em;
+}
+
+/* Tarjetas */
+.card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.card :is(h2, h3, p) {
+  margin: 4px 0;
+}
+
+/* Primera tarjeta tras el título */
+h2 + .card {
+  border-top: 2px solid #2563eb;
+}
+
+/* Badges y selector de padre */
+.badge {
+  background-color: #dbeafe;
+  color: #1e40af;
+  padding: 2px 6px;
+  font-size: 12px;
+}
+
+.badge:empty {
+  display: none;
+}
+
+article:has(.badge:not(:empty)) {
+  border-color: #2563eb;
+}
+
+/* Botones */
+button[type="button"] {
+  cursor: pointer;
+}
+
+button[aria-label] {
+  padding: 4px 8px;
+}
+
+/* Barra inferior de navegación */
+nav > ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 16px;
+}
+
+nav a {
+  color: #64748b;
+}
+
+nav a[aria-current="page"] {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+nav a:not([aria-current="page"]) {
+  color: #64748b;
+}
+
+nav a:hover {
+  color: #1e293b;
+}
+
+nav a:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
