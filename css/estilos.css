@@ -1,9 +1,48 @@
+:root {
+  /* Primario */
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #2563eb;
+  --color-primary-600: #1d4ed8;
+  --color-primary-700: #1d40af;
+  --color-primary-800: #1e3a8a;
+  --color-primary-900: #172554;
+
+  /* Neutros */
+  --color-neutral-50: #f8fafc;
+  --color-neutral-100: #f1f5f9;
+  --color-neutral-200: #e2e8f0;
+  --color-neutral-300: #cbd5e1;
+  --color-neutral-400: #94a3b8;
+  --color-neutral-500: #64748b;
+  --color-neutral-600: #475569;
+  --color-neutral-700: #334155;
+  --color-neutral-800: #1e293b;
+  --color-neutral-900: #0f172a;
+
+  /* Semánticas */
+  --bg-page: var(--color-neutral-50);
+  --bg-card: white;
+  --text-main: var(--color-neutral-900);
+  --text-muted: var(--color-neutral-500);
+  --border-subtle: var(--color-neutral-200);
+  --brand: var(--color-primary-500);
+  --brand-hover: var(--color-primary-600);
+
+  /* Color moderno en OKLCH */
+  --color-accent-oklch: oklch(0.55 0.22 260);
+}
+
 @layer base, components, utilities;
 
 @layer base {
   body {
     font-family: system-ui, sans-serif;
-    color: darkslategray;
+    background-color: var(--bg-page);
+    color: var(--text-main);
     line-height: 1.5;
     margin: 0;
     padding: 16px;
@@ -15,20 +54,20 @@
   }
 
   a {
-    color: royalblue;
+    color: var(--brand);
     text-decoration: none;
   }
 
   header {
-    background-color: whitesmoke;
-    color: navy;
+    background-color: var(--color-neutral-100);
+    color: var(--text-main);
     padding: 12px;
-    border-bottom: 1px solid lightgray;
-  }
+    border-bottom: 1px solid var(--border-subtle);
 
-  header a {
-    color: inherit;
-    font-weight: bold;
+    a {
+      color: inherit;
+      font-weight: bold;
+    }
   }
 
   button[type="button"] {
@@ -37,78 +76,125 @@
 }
 
 @layer components {
-  .card {
-    background-color: white;
-    border: 1px solid lightgray;
+  article.card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
     padding: 12px;
     margin-bottom: 12px;
-  }
 
-  .card h3 {
-    margin: initial;
-  }
+    &:hover {
+      border-color: var(--brand);
+    }
 
-  .card :is(h2, p) {
-    margin: 4px 0;
+    .card-title {
+      margin: initial;
+      color: var(--text-main);
+
+      a {
+        color: inherit;
+      }
+    }
+
+    .card-author {
+      margin: 4px 0;
+      color: var(--text-muted);
+    }
+
+    .card-price {
+      margin: 4px 0;
+      font-weight: 700;
+      color: var(--brand);
+    }
+
+    button:not([aria-label]) {
+      background-color: var(--brand);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 12px;
+      margin-top: 6px;
+
+      &:hover {
+        background-color: var(--brand-hover);
+      }
+    }
   }
 
   h2 + .card {
-    border-top: 2px solid royalblue;
+    border-top: 2px solid var(--brand);
   }
 
   .badge {
-    background-color: lightblue;
-    color: darkblue;
-    padding: 2px 6px;
+    --badge-bg: var(--color-primary-100);
+    --badge-color: var(--color-primary-700);
+    background-color: var(--badge-bg);
+    color: var(--badge-color);
+    padding: 2px 8px;
+    border-radius: 4px;
     font-size: 12px;
+    font-weight: 600;
+
+    &:empty {
+      display: none;
+    }
   }
 
-  .badge:empty {
-    display: none;
+  .badge--novedad {
+    --badge-bg: var(--color-accent-oklch);
+    --badge-color: white;
   }
 
   article:has(.badge:not(:empty)) {
-    border-color: royalblue;
+    border-color: var(--color-accent-oklch);
   }
 
   button[aria-label] {
     font: revert;
     padding: 4px 8px;
+    background-color: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
   }
 
-  nav > ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    gap: 16px;
-  }
+  nav {
+    background-color: var(--bg-card);
+    border-top: 1px solid var(--border-subtle);
+    padding: 8px 0;
 
-  nav a {
-    color: slategray;
-  }
+    > ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      gap: 16px;
+    }
 
-  nav a:not([aria-current="page"]) {
-    color: slategray;
-  }
+    a {
+      color: var(--text-muted);
+      text-decoration: none;
 
-  nav a[aria-current="page"] {
-    color: royalblue;
-    font-weight: 700;
-  }
+      &[aria-current="page"] {
+        color: var(--brand);
+        font-weight: 700;
+      }
 
-  nav a:hover {
-    color: darkslategray;
-  }
+      &:hover {
+        color: var(--text-main);
+      }
 
-  nav a:focus-visible {
-    outline: 2px solid royalblue;
-    outline-offset: 2px;
+      &:focus-visible {
+        outline: 2px solid var(--brand);
+        outline-offset: 2px;
+      }
+    }
   }
 }
 
 @layer utilities {
   .text-primary {
-    color: royalblue;
+    color: var(--brand);
     font-weight: bold;
   }
 }
